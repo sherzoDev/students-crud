@@ -1,4 +1,3 @@
-const $form = document.querySelector(".form");
 const $editForm = document.querySelector("#edit-form");
 const $addForm = document.querySelector("#add-form");
 const $count = document.querySelector(".count");
@@ -11,10 +10,10 @@ window.onload = async () => {
   renderElements(await fetchData())
 }
 
-$form.addEventListener("submit", function (evt) {
+$addForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   createData();
-  $form.reset();
+  $addForm.reset();
 })
 
 async function fetchData() {
@@ -89,15 +88,15 @@ async function renderElements(data) {
   data.forEach(element => {
     const templateClone = $template.cloneNode(true);
 
-    templateClone.querySelector("#student-id").textContent = element.id;
-    templateClone.querySelector("#student-name").textContent = element.name;
-    templateClone.querySelector(".student-marked-date").textContent = markData.slice(0, 10);
+    templateClone.querySelector(".student-id").textContent = element.id;
+    templateClone.querySelector(".student-name").textContent = element.name;
+    templateClone.querySelector(".student-marked-date").textContent = element.markData.slice(0, 10);
     templateClone.querySelector(".student-mark").textContent = element.mark;
     templateClone.querySelector(".student-edit").dataset.id = element.id;
     templateClone.querySelector(".student-delete").dataset.id = element.id;
     const $studentPasStatus = templateClone.querySelector(".student-pass-status");
 
-    if (element.mark >= 100) {
+    if (element.mark >= 80) {
       $studentPasStatus.textContent = "Pass";
       $studentPasStatus.classList.add("bg-success");
     } else {
@@ -118,12 +117,11 @@ $studentTableBody.addEventListener("click", evt => {
 
   if (evt.target.matches("#student-edit")) {
     const btnEditId = evt.target.dataset.id;
-    $form.addEventListener("submit", (evt) => {
+    $editForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       updateData(btnEditId);
-      $form.reset()
+      $editForm.reset()
     })
-
   }
 })
 
