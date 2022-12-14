@@ -124,8 +124,3 @@ $studentTableBody.addEventListener("click", evt => {
     })
   }
 })
-
-
-// Javacriptda qiyin amallarni biz async functionga olib yozamiz dasturimiz qotib qolmasligi uchun
-
-// Template letterals (``) => bactick
