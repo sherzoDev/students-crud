@@ -44,7 +44,7 @@ async function createData(data) {
     const response = await fetch("http://167.235.158.238/students", {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify({
         name: $name.value,
@@ -66,7 +66,7 @@ async function updateData(id) {
     const response = await fetch(`http://167.235.158.238/students${id}`, {
       method: 'PUT',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify({
         name: $editName.value,
@@ -90,13 +90,13 @@ async function renderElements(data) {
 
     templateClone.querySelector(".student-id").textContent = element.id;
     templateClone.querySelector(".student-name").textContent = element.name;
-    templateClone.querySelector(".student-marked-date").textContent = element.markData.slice(0, 10);
+    // templateClone.querySelector(".student-marked-date").textContent = element.markData.slice(0, 10);
     templateClone.querySelector(".student-mark").textContent = element.mark;
     templateClone.querySelector(".student-edit").dataset.id = element.id;
     templateClone.querySelector(".student-delete").dataset.id = element.id;
     const $studentPasStatus = templateClone.querySelector(".student-pass-status");
 
-    if (element.mark >= 80) {
+    if (element.mark >= 100) {
       $studentPasStatus.textContent = "Pass";
       $studentPasStatus.classList.add("bg-success");
     } else {
